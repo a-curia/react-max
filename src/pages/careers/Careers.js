@@ -1,12 +1,12 @@
 import { Link, useLoaderData } from "react-router-dom"
 
 export default function Careers() {
-  const careers = useLoaderData()
+  const careers = useLoaderData() // access the result of the Promise
 
   return (
     <div className="careers">
       {careers.map(career => (
-        <Link to='/' key={career.id}>
+        <Link to={career.id.toString()} key={career.id}>
           <p>{career.title}</p>
           <p>Based in {career.location}</p>
         </Link>
