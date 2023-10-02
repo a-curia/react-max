@@ -1,30 +1,30 @@
-import { BrowserRouter, Routes, Route, Link, NavLink } from 'react-router-dom';
+import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider } from 'react-router-dom';
 
 import './App.css';
-import Example from './components/Example';
 
 import Home from './pages/Home'
-import Contact from './pages/Contact';
 import About from './pages/About';
+import RootLayout from './layouts/RootLayout';
+import HelpLayout from './layouts/HelpLayout';
+import Faq from './pages/help/faq';
+import Contact from './pages/help/contact';
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path='/' element={<RootLayout />}>
+      <Route index element={<Home />}></Route>
+      <Route path="about" element={<About />}></Route>
+      <Route path="help" element={<HelpLayout />}>
+        <Route path="faq" element={<Faq />}></Route>
+        <Route path="contact" element={<Contact />}></Route>
+      </Route>
+    </Route>
+  )
+)
 
 function App() {
   return (
-    <BrowserRouter>
-      <header>
-        <nav>
-          <h1>Jobator</h1>
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="about">About</NavLink>
-        </nav>
-      </header>
-      <main>
-          <Routes>
-            <Route index element={<Home />}></Route>
-            <Route path="about" element={<About />}></Route>
-            <Route path="contact" element={<Contact />}></Route>
-          </Routes>
-      </main>
-    </BrowserRouter>
+      <RouterProvider router={router} />
   );
 }
 
