@@ -12,7 +12,7 @@ export default function Breadcrumbs() {
     .split("/")
     .filter((crumb) => crumb !== "")
     .map((crumb) => {
-      currentLink = +`/${crumb}`;
+      currentLink += `/${crumb}`;
 
       return (
         <div className="crumb" key={crumb}>
@@ -20,6 +20,6 @@ export default function Breadcrumbs() {
         </div>
       );
     });
-    
+
   return <div className="breadcrumbs">{crumbs}</div>;
 }
